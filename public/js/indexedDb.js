@@ -87,5 +87,9 @@ function saveRecord(record) {
     bs.add(record);
 };
 
+//show the site offline as it was online
+//so we will get all the values and then
+
+
 
 window.addEventListener('online', sendToServer);
