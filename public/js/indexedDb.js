@@ -19,34 +19,40 @@ const sendToServer = ()=>{
     let trans = db.transaction("DataStore","readwrite")
     let obj = trans.objectStore("DataStore")
 
-    fetch("/api/transaction")
-        .then(response => {
-            return response.json();
-        })
-        .then(data => {
-            transactions = data;
-            transactions.forEach(t=>{
-                // let trans = db.transaction("DataStore", 'readwrite');
-                // console.log("adding ")
-                // const bs = trans.objectStore("DataStore");
-                obj.add({
-                    id:t._id,
-                    name:t.name,
-                    value:t.value
-                })
+    let getAllTrans = obj.getAll()
+
+    getAllTrans.onsuccess = ()=>{
+        fetch('/api/transaction', {
+            method: 'POST',
+            body: JSON.stringify(getAllTrans.result),
+            headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json'
+            }
+          })
+            .then(response => response.json())
+            .then(serverResponse => {
+              if (serverResponse.message) {
+                throw new Error(serverResponse);
+              }
+              const transaction = db.transaction(['DataStore'], 'readwrite');
+              const bos = transaction.objectStore('DataStore');
+              bos.clear();
             })
-        });
+            .catch(err => {
+              console.log(err);
+            });
+        }
+}
+
     
-    let t1 = store.getAll()
-    t1.onsuccess = ()=>{
-        console.log(t1.result.length)
-    }
+    
     
 
 //   tx.oncomplete = ()=>{
 //       db.close()
 //   }
-}
+
 request.onsuccess = (e)=>{
     db = request.result
     tx = db.transaction("DataStore","readwrite")
@@ -77,10 +83,10 @@ request.onupgradeneeded = (e)=>{
 function saveRecord(record) {
     // open a new transaction with the database with read and write permissions 
     console.log("no internet but stored for now")
-    let trans = db.transaction(['expense'], 'readwrite');
+    let trans = db.transaction("DataStore", 'readwrite');
   
     // access the object store 
-    const bs = trans.objectStore('new data');
+    const bs = trans.objectStore('DataStore');
   
     // add record to your store with add method
     bs.add(record);
