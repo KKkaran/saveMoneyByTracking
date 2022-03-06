@@ -35,3 +35,5 @@
     <p>Incase of questions, Find me on: </p>
     <p><img src="icons/gmail.png" height="18" width="20"/> :<a href='mailto: karanpreetsodhi1997@gmail.com'>Email</a></p>
     <p><img src="icons/github.png" height="18" width="20"/> :<a href='https://github.com/kkkaran'>Github</a></p>
+
+![](icons/sc1.PNG)
