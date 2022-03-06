@@ -26,7 +26,7 @@ self.addEventListener('activate', function (e) {
     e.waitUntil(
       caches.keys().then(function (list) {
         let cacheKeeplist = list.filter(function (key) {
-          return key.indexOf(application);
+          return key.indexOf(app);
         });
             cacheKeeplist.push(cacheName);
             // returns a promise that resolves once all old versions of the cache have been deleted 
