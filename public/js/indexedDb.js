@@ -64,26 +64,19 @@ request.onsuccess = (e)=>{
     //fetch the data and store in the db
     
 }
-
 request.onupgradeneeded = (e)=>{
     //the store defines the structure for the data
     let db = request.result,
     store = db.createObjectStore("DataStore",
         { autoIncrement: true }
     )
-    //index = store.createIndex("transactionName","transactionName",{unique:false}) 
-    
-
 }
 function saveRecord(record) {
-    // open a new transaction with the database with read and write permissions 
+    
     console.log("no internet but stored for now")
     let trans = db.transaction("DataStore", 'readwrite');
   
-    // access the object store 
     const bs = trans.objectStore('DataStore');
-  
-    // add record to your store with add method
     bs.add(record);
 };
 
