@@ -44,11 +44,6 @@ const sendToServer = ()=>{
             });
         }
 }
-
-    
-    
-    
-
 //   tx.oncomplete = ()=>{
 //       db.close()
 //   }
