@@ -1,6 +1,6 @@
 let transactions = [];
 let myChart;
-
+console.log("in index js file")
 fetch("/api/transaction")
   .then(response => {
     return response.json();
@@ -8,7 +8,8 @@ fetch("/api/transaction")
   .then(data => {
     // save db data on global variable
     transactions = data;
-
+    //console.log(transactions)
+    //let netTotal
     populateTotal();
     populateTable();
     populateChart();
@@ -21,7 +22,7 @@ function populateTotal() {
   }, 0);
 
   let totalEl = document.querySelector("#total");
-  totalEl.textContent = 200;
+  totalEl.textContent = total;
 }
 
 function populateTable() {
@@ -143,6 +144,8 @@ function sendTransaction(isAdding) {
     amountEl.value = "";
   });
 }
+
+
 
 document.querySelector("#add-btn").onclick = function() {
   sendTransaction(true);
