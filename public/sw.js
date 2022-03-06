@@ -1,5 +1,3 @@
-const { application } = require("express");
-
 console.log("SW file linked nows!!!")
 const app = 'Budget Tracker';     
 const version = 'v1';
