@@ -7,9 +7,9 @@ fetch("/api/transaction")
   })
   .then(data => {
     // save db data on global variable
+    console.log("&&&&&&&&&&&&&&&&&&&&&&")
+    console.log(transactions)
     transactions = data;
-    //console.log(transactions)
-    //let netTotal
     populateTotal();
     populateTable();
     populateChart();
@@ -17,6 +17,7 @@ fetch("/api/transaction")
 
 function populateTotal() {
   // reduce transaction amounts to a single total value
+  console.log("in populate total method")
   let total = transactions.reduce((total, t) => {
     return total + parseInt(t.value);
   }, 0);
@@ -43,6 +44,7 @@ function populateTable() {
 
 function populateChart() {
   // copy array and reverse it
+  console.log("in populate chart")
   let reversed = transactions.slice().reverse();
   let sum = 0;
 
